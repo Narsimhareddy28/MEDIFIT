@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Yoga{% endblock title %}
+
+{% block head %}
+<link rel="icon" href="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-yoga-health-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-1.png">
+<script src="{% static 'asanas/js/p5.min.js' %}"></script>
+<script src="{% static 'asanas/js/ml5.min.js' %}"></script>
+<script src="{% static 'asanas/js/learn.js' %}"></script>
+<link rel="stylesheet" href="{% static 'asanas/css/style.css' %}">
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178448067-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-178448067-1');
+</script>
+{% endblock head %}
+
+{% block body %}
+<div id="rectangle" style="width:640px; height:480px; margin-left:80px; margin-top:160px; background-color:grey; text-align:center; box-sizing: border-box; padding: 210px; font-size: 50px; font-weight: normal; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color:white; display:block;">Loading...</div>
+<img src="{% static 'asanas/images/sparkles.svg' %}" id="sparkles" style="top:65px; left:800px; position:absolute; width:120px; height:107px; z-index:1; display:none">
+<h1 id="finish" style="font-size:50px; top:-20px; left:910px; position:absolute;"></h1>
+<h1 id="welldone" style="font-size:50px; top:35px; left:910px; position:absolute;"></h1>
+<div class="parent">
+  <h1 id="poseName" class="child" style="font-size: 100px; text-align:center;"><span></span></h1>
+</div>
+<img id="poseImg" src="{% static 'asanas/images/mountain.svg' %}" style="width:340px; height:340px; position: absolute; left:950px; top: 280px;">
+<h1 style="font-size: 100px; top:520px; left:1000px"><span id="time">00:10</span></h1>
+<h1 style="font-size: 40px; top:630px; left:960px">seconds left to hold</h1>
+<div><a href="{% url 'dashboard' %}" style="width: 150px"><indexbutton style="font-size: 40px; top:740px">Back</indexbutton></a></div>
+{% endblock body %}

@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Heart Disease{% endblock title %}
+{% block head %}
+    <link rel="icon" href="https://img.icons8.com/external-bearicons-outline-color-bearicons/64/000000/external-Home-valentine-love-bearicons-outline-color-bearicons.png">
+<!-- INLINE STYLESHEET-->
+<style type='text/css'>
+    body {
+        background-image: url(static/hd.png);
+                font-family: sans-serif;
+
+    }
+
+    .regform {
+        width: 800px;
+        background-color: rgb(0, 0, 0, 0.7);
+        margin: auto;
+        color: #FFFFFF;
+        padding: 10px 0px 10px 0px;
+        text-align: center;
+        border-radius: 15px 15px 0px 0px;
+
+    }
+
+    .regform-1{
+        width: 800px;
+        background-color: rgb(0, 0, 0, 0.7);
+        margin: auto;
+        color: #FFFFFF;
+        padding: 0px 0px 80px 0px;
+        text-align: center;
+        border-radius: 0px 0px 15px 15px;
+        margin-bottom:45px
+
+    }
+    .main-form {
+        width: 800px;
+        margin: auto;
+        background-color: rgb(0, 0, 0, 0.5);
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-bottom: 20px;
+        color: #FFFFFF;
+    }
+
+    .form-group {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    {% comment %} .container {  display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-auto-columns: 1fr;
+        grid-auto-rows: 1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        justify-content: center;
+        align-content: center;
+        justify-items: center;
+        align-items: center;
+      } {% endcomment %}
+      
+</style>
+<!-- END STYLESHEET-->
+
+{% endblock head %}
+{% block body %}
+<div>
+<div class='regform mt-3'>
+    <h1>Heart Disease Detection</h1>
+</div>
+
+<form method="post"  class='main-form needs-validation' style='margin-bott: 30px;' method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col">
+            <div class='form-group'>
+                <label for="firstname">Firstname</label>
+                <input type="text" name="firstname" id="firstname" class="form-control" required='True'>
+            </div>
+        </div>
+        <div class="col">
+            <div class='form-group'>
+                <label for="lastname">Lastname</label>
+                <input type="text" name="lastname" id="lastname" class="form-control" required='True'>
+            </div>
+        </div>
+    </div>
+
+
+    <div class='form-group'>
+        <label for="phone">Phone No.</label>
+        <input type="tel"  name="phone" id="phone" class="form-control" required='True'>
+        <small class='form-text ' style='color: #FFFFFF;'>* Include your area code</small>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col">
+            <div class='form-group'>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" required='True'>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select name="gender" id="gender" class="form-control" required='True'>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div class='row'>
+
+        <div class="col">
+            <label for="op">Old Peak</label>
+            <input type="number" step='any' required='True' name='op' id='op' class='form-control'>
+        </div>
+
+        <div class="col">
+            <label for="mhra">Max. Heart Rate achieved</label>
+            <input type='number' step="any" required='True' name='mhra' id='mhra' class='form-control'>
+        </div>
+
+
+        <div class="col">
+            <label for="eia">Exercise induces angina</label>
+            <select required='True' name='eia' id='eia' class='form-control'>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class='row'>
+        <div class="col">
+            <label for="nmv"> No. of major vessels</label>
+            <select required='True' name='nmv' id='nmv' class='form-control'>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <div class="col">
+            <label for="tcp">Type of Chest Pain</label>
+            <select  required='True' name='tcp' id='tcp' class='form-control'>
+                <option value="0">typical angina</option>
+                <option value="1">atypical angina</option>
+                <option value="2">non-anginal pain</option>
+                <option value="3">asymptomatic</option>
+            </select>
+        </div>
+
+
+        <div class="col">
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age" class="form-control" required='True'>
+        </div>
+
+        <div class="col">
+            <label for="thal">Thal</label>
+            <select required='True' name='thal' id='thal' class='form-control'>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+    </div>
+
+
+
+
+    <div class='text-center'>
+        <button type='submit' class='btn btn-success' style=' width:700px;margin-top: 30px;'> Submit
+        </button>
+    </div>
+
+
+
+</form>
+<div class='regform-1'>
+</div>
+{% comment %} </div>
+
+    <div class="card">
+        <div class="card-body">
+          This is some text within a card body.
+        </div>
+      </div>
+</div> {% endcomment %}
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+
+{% endblock body %}

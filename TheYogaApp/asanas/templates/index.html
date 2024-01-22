@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block head %}
+    <link rel="icon" href="https://img.icons8.com/external-bearicons-outline-color-bearicons/64/000000/external-Home-valentine-love-bearicons-outline-color-bearicons.png">
+<!-- INLINE STYLESHEET-->
+<style>
+      body{
+            background: rgb(0,0,200,0.5);
+            font-family: 'Bree Serif', serif;
+            color: white;
+            text-shadow: 0 0 3px black;
+            overflow-x: hidden;
+      }
+      .pane{
+            background: rgb(24,24,24,0.4);
+      }
+</style>
+<!-- END STYLESHEET-->
+
+{% endblock head %}
+{% block body %}
+<div class=" container rounded my-4 shadow-lg pane h-75 w-75" style="margin-left:100px;">
+      <h1 class="position-absolute" style="margin-top:10%; margin-left:7%;">EXCUSES DON'T KILL FAT,<br>EXERCISES DO!<br>START YOUR JOURNEY TOWARDS<br>FITNESS TODAY!</h1>
+      <img class="py-3 h-100 d-block" src="{% static 'asanas/images/homeimg_2.svg' %}" style="position:relative !important; margin-left:65%;">
+</div>
+<div class="container rounded my-4 shadow-lg pane h-75 w-75" style="margin-right:100px;">
+      <h1 class="position-absolute" style="margin-top:15%; margin-left:15%;">STEP BY STEP ASSISTANCE AND GUIDANCE!</h1>
+      <img class="py-3 h-100 d-block" src="{% static 'asanas/images/homeimg_1.svg' %}" style="position:relative !important; margin-left:-10%;">
+</div>
+<div class="container rounded my-4 shadow-lg pane h-75 w-75" style="margin-left:100px;">
+      <h1 class="position-absolute" style="margin-top:12%; margin-left:10%;">GET DETAILED<br>STATISTICS!</h1>
+      <img class="py-3 h-100 d-block" src="{% static 'asanas/images/homeimg_3.svg' %}" style="position:relative !important; margin-left:50%;">
+</div>
+{% endblock body %}

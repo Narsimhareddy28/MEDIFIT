@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Register{% endblock title %}
+{% block head %}
+<link rel="icon" href="https://img.icons8.com/external-filled-outline-geotatah/64/000000/external-register-training-management-system-filled-outline-filled-outline-geotatah.png">
+
+<!-- INLINE CSS -->
+<style>
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Poppins', sans-serif
+ }
+
+ body {
+     background: #ecf0f3;
+ }
+
+ .wrapper {
+     max-width: 70%;
+     min-height: 500px;
+     margin: 80px auto;
+     padding: 40px 30px 30px 30px;
+     background-color: #ecf0f3;
+     border-radius: 15px;
+     box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff
+ }
+
+ .logo {
+     width: 80px;
+     margin: auto
+ }
+
+ .logo img {
+     padding: 5px;
+     width: 100%;
+     height: 80px;
+     object-fit: cover;
+     border-radius: 30%;
+     box-shadow: 0px 0px 3px #5f5f5f, 0px 0px 0px 5px #ecf0f3, 8px 8px 15px #a7aaa7, -8px -8px 15px #fff
+ }
+
+ .wrapper .name {
+     font-weight: 600;
+     font-size: 1.4rem;
+     letter-spacing: 1.3px;
+     padding-left: 10px;
+     color: #555
+ }
+
+ .wrapper .form-field input {
+     width: 100%;
+     display: inline-block;
+     border: none;
+     outline: none;
+     background: none;
+     font-size: 1.2rem;
+     color: #666;
+     padding: 10px 15px 10px 10px
+ }
+
+.radio-form{
+     width: 40%;
+     display: inline-block;
+     margin: 10px 40px;
+     padding: 15px;
+     margin-bottom: 20px;
+     border-radius: 20px;
+     box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff
+}
+ .wrapper .form-field {
+     width: 40%;
+     display: inline-block;
+     margin: 10px 40px;
+     padding-left: 10px;
+     margin-bottom: 20px;
+     border-radius: 20px;
+     box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff
+ }
+
+ .wrapper .form-field .fas {
+     color: #555
+ }
+
+ .wrapper .btn {
+     box-shadow: none;
+     width: 20%;
+     height: 40px;
+     background-color: #03A9F4;
+     color: #fff;
+     border-radius: 25px;
+     box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+     letter-spacing: 1.3px
+ }
+
+ .wrapper .btn:hover {
+     background-color: #039BE5
+ }
+
+ .wrapper a {
+     text-decoration: none;
+     font-size: 0.8rem;
+     color: #03A9F4
+ }
+
+ .wrapper a:hover {
+     color: #039BE5
+ }
+
+ @media(max-width: 380px) {
+     .wrapper {
+         margin: 30px 20px;
+         padding: 40px 15px 15px 15px
+     }
+ }
+</style>
+<!--END CSS-->
+
+{% endblock head %}
+{% block body %}
+<div style="margin-left:80em" class="text-center fs-6 mt-2"> <button type="button" class="btn btn-primary py-1 px-2  mx-2 mt-2"><a href="{% url 'login' %}" class="text-white text-decoration-none">Login</a></button>
+</div>
+
+<div class="wrapper">
+    
+
+    <div class="logo mt-2"> <img class="p-3" src="https://img.icons8.com/ios/50/000000/gender-neutral-user.png" alt="Logo"></div>
+    <div class="text-center mt-1 name">Register</div>
+    <form class="p-3" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        {% if field.name != 'medical_conditions' and field.name != 'gender' and field.name != 'diet' and field.name != 'exercise_frequency' %}
+        <div class="form-field">{{field}}</div>
+        {% endif %}
+        {% endfor %}
+        <div class="radio-form">
+        <p style="font-size: 1.3rem; color: #555; letter-spacing: 0.3px; padding-left: 5px;">Exercise Frequency</p>
+        {% for field in form %}
+            {% if field.name == 'exercise_frequency' %}
+                {{ form.exercise_frequency }}
+            {% endif %}
+        {% endfor %}
+        </div>
+
+        <div class="radio-form">
+        <p style="font-size: 1.3rem; color: #555; letter-spacing: 0.3px; padding-left: 5px;">Gender</p>
+        {% for field in form %}
+            {% if field.name == 'gender' %}
+                {{ form.gender }}
+            {% endif %}
+        {% endfor %}
+        </div>
+
+        <h4 class="d-block text-center mt-5 mb-3">Any Health Problems?</h4>
+        {% for value, label in form.diet.field.choices %}
+            <input type="checkbox" class="btn-check" name="diet" id="id_diet_{{ value }}" value="{{ value }}">
+            <label class="btn-outline-success text-dark mx-1 my-1 px-3 py-1 border border-secondary rounded-3" for="id_diet_{{ value }}">{{ label }}</label>
+        {% endfor %}
+
+        <h4 class="d-block text-center mt-5 mb-3">Medical Conditions</h4>
+        {% for value, label in form.medical_conditions.field.choices %}
+            <input type="checkbox" class="btn-check" name="medical_conditions" id="id_medical_conditions_{{ value }}" value="{{ value }}">
+            <label class="btn-outline-danger text-dark mx-1 my-1 px-3 py-1 border border-secondary rounded-3" for="id_medical_conditions_{{ value }}">{{ label }}</label>
+        {% endfor %}
+        <button type="submit" class="btn mt-3 bg-dark mx-auto d-block">Register</button>
+    </form>
+    <div class="text-center fs-6">Already a user? <a href="{% url 'login' %}" class="fs-6">Login</a> </div>
+</div>
+{% endblock body %}

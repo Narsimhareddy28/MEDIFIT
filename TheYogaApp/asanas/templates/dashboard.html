@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dashboard{% endblock title %}
+{% block head %}
+<link rel="icon" href="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-dashboard-100-most-used-icons-flaticons-lineal-color-flat-icons.png">
+{% endblock head %}
+{% block body %}
+
+
+<style>
+body{
+    background: rgb(0,0,200,0.5);
+}
+    .innerContainer {
+      width: 450px;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .circle {
+      border-radius: 50%;
+      background-color: rgb(0,0,200,0.3);
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      opacity: 0;
+      animation: scaleIn 4s infinite cubic-bezier(.36, .11, .89, .32);
+    }
+
+    .item {
+      z-index: 100;
+      padding: 5px;
+    }
+
+    .item img {
+      width: 150px;
+    }
+    @keyframes scaleIn {
+      from {
+        transform: scale(.5, .5);
+        opacity: .5;
+      }
+      to {
+        transform: scale(2.5, 2.5);
+        opacity: 0;
+      }
+}
+</style>
+<!--END CSS-->
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-info" role="alert">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<!------- COURSE SECTION ------->
+
+<section>
+    
+    <h1 class="d-block mx-5 p-3">Courses</h1>
+    <div class="container shadow m-auto p-3 mb-5 rounded bg-light w-100 d-flex justify-content-between flex-wrap">
+        {% for asan in asana %}
+            <div>
+            <img src="{{ asan.image }}" alt="{{ asan.name }}" height="200" width="150" class="shadow bg-light mt-3">
+                <p class="text-center"><b>{{ asan.name }}</b></p>
+            </div>
+        {% endfor %}
+        <div class="align-self-center"><a href="{% url 'yoga' %}"><button class="btn btn-primary px-5 py-2 m-3">Start</button></a></div>
+    </div>
+</section>
+
+<!------- CALCULATIONS SECTION ------->
+<section>
+    <h1 class="d-block mx-5 p-3">Body Type</h1>
+    <div class="container d-flex mb-5">
+        <div class="outerContainer">
+            <div class="innerContainer">
+                <div class="item">
+                    <div class="rounded-circle text-center text-light bg-dark" style="height:150px; width: 150px; padding-top:35px; font-size:1.4rem;"><b>{{bmr}}<br/>KCal/Day</b></div>
+                </div>
+            <div class="circle" style="animation-delay: 0s"></div>
+            <div class="circle" style="animation-delay: 1s"></div>
+            <div class="circle" style="animation-delay: 2s"></div>
+            <div class="circle" style="animation-delay: 3s"></div>
+            </div>
+            <h4 class="d-block w-100 text-center text-wrap">Basal Metabolic Rate(BMR)</h4>
+        </div>
+        <div class="outerContainer">
+            <div class="innerContainer">
+                <div class="item">
+                    <div class="rounded-circle text-center text-light bg-dark" style="height:150px; width: 150px; padding-top:35px; font-size:1.4rem;"><b>{{bmi}}<br/>{{ bodytype }}</b></div>
+                </div>
+            <div class="circle" style="animation-delay: 0s"></div>
+            <div class="circle" style="animation-delay: 1s"></div>
+            <div class="circle" style="animation-delay: 2s"></div>
+            <div class="circle" style="animation-delay: 3s"></div>
+            </div>
+            <h4 class="d-block w-100 text-center text-wrap">Body Mass Index(BMI)</h4>
+        </div>
+        <div class="outerContainer">
+            <div class="innerContainer">
+                <div class="item">
+                    <div class="rounded-circle text-center text-light bg-dark" style="height:150px; width: 150px; padding-top:35px; font-size:1.4rem;"><b>{{amr}}<br/>KCal/Day</b></div>
+                </div>
+            <div class="circle" style="animation-delay: 0s"></div>
+            <div class="circle" style="animation-delay: 1s"></div>
+            <div class="circle" style="animation-delay: 2s"></div>
+            <div class="circle" style="animation-delay: 3s"></div>
+            </div>
+            <h4 class="d-block w-100 text-center text-wrap">Active Metabolic Rate(AMR)</h4>
+        </div>
+    </div>
+    <div class="container bg-light rounded shadow p-3 mb-5">
+        <ul style="list-style-type: none; font-size:1.4rem;">
+        {% for item in type %}
+            {% if item == 'TIPS' %}
+            <li class="text-center"><b><u>{{ item }}</u></b></li>
+            {% else %}
+            <li>• {{ item }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+</section>
+
+
+<!------- DIET SECTION ------->
+<section>
+    <h1 class="d-block mx-5 p-3">Diet Recommendations</h1>
+        <div class="container w-100">
+            {% for diet in diet %}
+            <div class="container shadow bg-light p-3 my-5 rounded">
+                {% if diet.problem != 'None' %}
+                    <h3 class="d-block text-center mb-4 text-uppercase"><u>{{ diet.problem }}</u></h3>
+                <div class="alert alert-danger text-uppercase"><img src="https://img.icons8.com/ios/30/000000/error--v1.pn"/><b>  note: this diet is for general {{ diet.problem }} patients. Please consult professional nutritionist for personalized diet.</b></div>
+                {% else %}
+                    <h3 class="d-block text-center mb-4 text-uppercase"><u>General</u></h3>
+                {% endif %}
+                <ol>
+                {% for tip in diet.tips_list %}
+                    <li style="font-size:1.4rem;">{{ tip }}</li>
+                {% endfor %}
+                </ol>
+            </div>
+            {% endfor %}
+        </div>
+</section>
+{% endblock body %}
